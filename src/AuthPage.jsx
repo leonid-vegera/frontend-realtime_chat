@@ -1,14 +1,22 @@
+import axios from 'axios';
+
 const AuthPage = ({onAuth}) => {
   const onSubmit = (event) => {
     event.preventDefault();
+    console.log('ET', event.target[0])
     const {value} = event.target[0];
-    onAuth({username: value, secret: value});
+    axios.post(
+      'http://localhost:1927/authenticate',
+      {username: value}
+    ).then(result => {
+      onAuth({username: value, secret: value});
+    }).catch(error => console.log(error))
   };
 
   return (
     <div className="background">
       <form onSubmit={onSubmit} className="form-card">
-        <div className="form-title">Welcome 👋</div>
+        <div className="form-title">Welcome 🍻</div>
 
         <div className="form-subtitle">Set a username to get started</div>
 
