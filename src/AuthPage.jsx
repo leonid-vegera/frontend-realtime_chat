@@ -3,14 +3,13 @@ import axios from 'axios';
 const AuthPage = ({onAuth}) => {
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log('ET', event.target[0])
     const {value} = event.target[0];
     axios.post(
       'http://localhost:1927/authenticate',
-      {username: value}
+      {name: value, password: value}
     ).then(result => {
-      onAuth({username: value, secret: value});
-    }).catch(error => console.log(error))
+      onAuth({...result.data, secret: value});
+    }).catch(error => console.log('Error occurred', error))
   };
 
   return (
