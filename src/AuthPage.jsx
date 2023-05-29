@@ -6,7 +6,7 @@ const AuthPage = ({onAuth}) => {
     const {value} = event.target[0];
     axios.post(
       'http://localhost:1927/authenticate',
-      {name: value, password: value}
+      {name: value}
     ).then(result => {
       onAuth({...result.data, secret: value});
     }).catch(error => console.log('Error occurred', error))
